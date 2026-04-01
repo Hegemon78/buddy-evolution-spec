@@ -229,13 +229,13 @@ Build as an independent Claude Code plugin/extension. Community prototypes alrea
 
 **Advantages:** Ship fast, iterate with community, no dependency on Anthropic's roadmap.
 
-### Path B: Anthropic-Native Integration
+### Path B: Anthropic Collaboration (Open Door)
 
-Propose to Anthropic for native Claude Code integration. The existing `/buddy` system already provides the foundation — species, stats, ASCII art, animations.
+Anthropic has confirmed that `/buddy` was an April Fools' feature that will be removed ([comment](https://github.com/anthropics/claude-code/issues/41867#issuecomment-4172543771)). However, the community response (64+ upvotes, detailed specs, working prototypes in one day) demonstrates real demand.
 
-**Advantages:** Full access to session data, seamless UX, official support.
+The door remains open for future collaboration. If Anthropic reconsiders, this specification is ready for native integration.
 
-**Both paths are not mutually exclusive.** A community plugin can serve as a proof of concept that demonstrates demand and validates mechanics, potentially leading to official adoption.
+**Current focus: community plugin development.**
 
 ---
 
