@@ -252,15 +252,19 @@ This is a community specification. To contribute:
 
 ## Credits
 
-| Contributor | Role |
-|-------------|------|
-| [@Hegemon78](https://github.com/Hegemon78) | Project lead, original proposal, v2/v3 spec, monetization model |
-| [@FrankFMY](https://github.com/FrankFMY) | Core contributor: achievement-milestone evolution, buddy journal, contextual familiarity, technical schema |
-| [@bgreal5](https://github.com/bgreal5) | Critical feedback: stats as flavor-only, auto-evolution concept |
-| [@tarunt815](https://github.com/tarunt815) | Pokemon-style evolution concept |
-| [@elmdecoste](https://github.com/elmdecoste) | Digivolution branching paths |
-| [@JacobRSchwartz-AI](https://github.com/JacobRSchwartz-AI) | UX concept: non-disruptive buddy interaction |
-| r/ClaudeAI community | Extensive discussion and reality-checking |
+| Role | Contributor |
+|------|-------------|
+| Project lead, author | [@Hegemon78](https://github.com/Hegemon78) — original proposal, v1/v2/v3 spec, monetization model, universal activity framework |
+
+## Acknowledgments
+
+Thanks to the community members whose feedback shaped this specification:
+
+- [@FrankFMY](https://github.com/FrankFMY) — achievement-milestone mechanics, buddy journal concept, contextual familiarity idea
+- [@bgreal5](https://github.com/bgreal5) — critical feedback on stats model, auto-evolution suggestion
+- [@tarunt815](https://github.com/tarunt815) — pokemon-style evolution idea
+- [@elmdecoste](https://github.com/elmdecoste) — digivolution branching concept
+- r/ClaudeAI community — discussion and feedback
 
 ---
 
