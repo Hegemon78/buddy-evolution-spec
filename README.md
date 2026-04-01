@@ -52,6 +52,8 @@ This repo is a **collaborative specification** for how the buddy system could ev
 | Project milestones | Commits, closed issues, PRs | Medium |
 | Consistency | Regular usage patterns | Low (passive) |
 
+> See [§9 Achievement Catalog](#9-achievement-catalog) for the full list of 34 defined achievements and their triggers.
+
 #### Levels
 
 | Level | XP Required | Unlock |
@@ -169,6 +171,290 @@ All cosmetics are earnable through gameplay. Purchase is a shortcut, not a gate.
 
 **Stats are a personality mirror.** They reflect your coding style and grow through usage. They never gate functionality.
 
+### 9. Achievement Catalog
+
+34 achievements across 6 categories. Every trigger maps to a metric already tracked by the [buddy-evolution PoC](https://github.com/RaphaelRUzan/buddy-evolution) session tracker — no guesswork, no new telemetry required.
+
+**Design principles:**
+- Every trigger is technically detectable from session data
+- No achievement rewards bad behavior (no "skip tests", no "rush code")
+- XP values are bonuses on top of session XP, not the sole progression driver
+- Hidden achievements (marked 🔒) are only revealed after earning
+- Repeatable achievements (marked ♻️) give ongoing micro-rewards
+
+#### Coding
+
+| Achievement | Trigger | XP | Rarity |
+|---|---|---|---|
+| First Steps | Complete first session | 100 | Common |
+| Getting Comfortable | Complete 10 sessions | 200 | Common |
+| Centurion | Complete 100 sessions | 1,000 | Uncommon |
+| Veteran | Complete 500 sessions | 3,000 | Rare |
+| Living Legend | Complete 1,000 sessions | 10,000 | Legendary |
+| The Architect | 20+ file edits in one session | 500 | Rare |
+| Tool Master | 100+ tool calls in one session | 400 | Uncommon |
+| Wordsmith | 100K+ output tokens in one session | 600 | Rare |
+
+#### Testing
+
+| Achievement | Trigger | XP | Rarity |
+|---|---|---|---|
+| First Test | Run tests in a session (`testRuns ≥ 1`) | 100 | Common |
+| Test Enthusiast | 10+ test runs in one session | 300 | Uncommon |
+| Test Marathon | 50+ test runs in one session | 1,000 | Epic |
+| Test-Driven | Run tests in 10 consecutive sessions | 800 | Rare |
+
+#### Debugging
+
+| Achievement | Trigger | XP | Rarity |
+|---|---|---|---|
+| Persistence | 5+ rejected tool calls, still complete work (`fileEdits > 0`) | 300 | Uncommon |
+| Against All Odds | 20+ rejected tool calls, still complete work | 800 | Epic |
+| Unbreakable | 0 rejected calls in a session with 50+ total calls | 500 | Rare |
+| Context Survivor | Productive work after context reset (`resets ≥ 1, edits ≥ 5`) | 400 | Uncommon |
+
+#### Consistency
+
+| Achievement | Trigger | XP | Rarity |
+|---|---|---|---|
+| Streak: Week | 7 consecutive days | 500 | Common |
+| Streak: Month | 30 consecutive days | 2,000 | Rare |
+| Streak: Quarter | 90 consecutive days | 5,000 | Epic |
+| Streak: Year | 365 consecutive days | 20,000 | Legendary |
+| Early Bird ♻️ | Session started before 7 AM local | 100 | Common |
+| Night Owl ♻️ | Session active past midnight | 100 | Common |
+| Marathon | Session longer than 4 hours | 600 | Rare |
+
+#### Exploration
+
+| Achievement | Trigger | XP | Rarity |
+|---|---|---|---|
+| Tourist | Work in 5 different projects | 400 | Uncommon |
+| Globe Trotter | Work in 20 different projects | 1,500 | Epic |
+| Deep Roots | Reach Expert familiarity (50+ touches) on 5 files | 800 | Rare |
+| Homecoming | Return to a file after 30+ days (triggers Nostalgic) | 200 | Common |
+| Old Friend | Return to an Expert file after 60+ days away | 500 | Rare |
+
+#### Meta
+
+| Achievement | Trigger | XP | Rarity | |
+|---|---|---|---|---|
+| Pet Day | `/buddy pet` 10 times in one session | 50 | Common | |
+| First Evolution | Make first evolution choice (level 5) | 1,000 | Uncommon | |
+| Final Form | Make second evolution choice (level 10) | 3,000 | Rare | |
+| The Collector | Earn 20 different achievements | 2,000 | Epic | |
+| Happy Birthday | Use buddy on 1-year hatch anniversary | 5,000 | Legendary | 🔒 |
+| Completionist | Earn all non-hidden achievements | 10,000 | Legendary | 🔒 |
+
+#### Distribution
+
+| Rarity | XP Range | Count |
+|---|---|---|
+| Common | 50–500 | 8 (23%) |
+| Uncommon | 300–1,000 | 7 (21%) |
+| Rare | 500–3,000 | 10 (29%) |
+| Epic | 800–5,000 | 5 (15%) |
+| Legendary | 5,000–20,000 | 4 (12%) |
+
+Rare-heavy distribution is intentional — the mid-game should always have something to work toward. Exact numbers are a starting point; final balancing depends on the XP-to-level curve.
+
+### 10. Interaction Commands
+
+| Command | Description | Status |
+|---|---|---|
+| `/buddy` | Toggle buddy on/off | Existing |
+| `/buddy pet` | Pet your buddy | Existing |
+| `/buddy stats` | Show level, XP, stats, streak | New |
+| `/buddy achievements` | List earned, in-progress, and hidden | New |
+| `/buddy journal` | Show recent journal entries | New |
+| `/buddy evolve` | Make evolution choice (when eligible) | New |
+| `/buddy rename <name>` | Rename your buddy | New |
+
+#### Example outputs
+
+**`/buddy stats`**
+
+```
+🐉 Zephyr — Epic Dragon (Scholar)
+Level 7 ████████░░ 45,200 / 60,000 XP
+Streak: 12 days (🔥 1.2x)
+
+DEBUGGING ██████████████████░░  79 (+12)
+PATIENCE  █████████░░░░░░░░░░░  53  (+8)
+CHAOS     ████░░░░░░░░░░░░░░░░  25  (+2)
+WISDOM    ████████████████████  94 (+16)
+SNARK     ██████████░░░░░░░░░░  55  (+3)
+```
+
+*Base stat shown first, growth bonus in parentheses. Bar length reflects effective stat (base + growth).*
+
+**`/buddy achievements`**
+
+```
+🏆 Achievements — 12/32 earned
+
+Recent:
+  ✅ Centurion — Complete 100 sessions (+1,000 XP)
+  ✅ Streak: Month — 30 consecutive days (+2,000 XP)
+
+In Progress:
+  ⬜ Veteran ········· 147/500 sessions
+  ⬜ Deep Roots ······ 3/5 Expert files
+  ⬜ Streak: Quarter · 34/90 days
+
+🔒 2 hidden achievements undiscovered
+```
+
+*Non-hidden total is 32. Progress bars show partial completion for trackable achievements.*
+
+**`/buddy evolve`**
+
+```
+🐉 Zephyr is ready to evolve!
+
+Choose a path — this is permanent:
+
+  [A] Scholar — calm, methodical, quotes references
+  [B] Trickster — chaotic, jokes, unexpected reactions
+
+Type A or B to choose.
+```
+
+*Only appears when level threshold is reached and choice hasn't been made. Shows species-specific path descriptions.*
+
+### 11. Technical Schema
+
+Soul file v2 — stored at `.buddy/soul.json`. Backwards-compatible extension of the current soul file.
+
+```jsonc
+{
+  "version": 2,
+
+  // === Immutable identity (set at creation) ===
+  "identity": {
+    "species": "dragon",
+    "name": "Zephyr",
+    "rarity": "epic",
+    "personality": "methodical",
+    "hatchedAt": "2026-04-01T10:00:00Z",
+    "accountHash": "a1b2c3"
+  },
+
+  // === Progression state ===
+  "progression": {
+    "level": 7,
+    "totalXP": 45200,
+    "tier": "juvenile",              // hatchling | juvenile | adult | elder | ascended
+    "evolutionPath": ["scholar"],    // choices made so far (max 2)
+    "evolvedAt": {                   // timestamp of each tier transition
+      "juvenile": "2026-04-15T12:00:00Z",
+      "adult": null,
+      "elder": null,
+      "ascended": null
+    }
+  },
+
+  // === Stats: base (from hash, immutable) + growth (from usage) ===
+  "stats": {
+    "base": { "debugging": 67, "patience": 45, "chaos": 23, "wisdom": 78, "snark": 52 },
+    "growth": { "debugging": 12.4, "patience": 8.1, "chaos": 2.3, "wisdom": 15.6, "snark": 3.2 }
+  },
+
+  // === Streak tracking ===
+  "streak": {
+    "currentDays": 12,
+    "longestDays": 34,
+    "lastSessionDate": "2026-04-01"  // ISO date, not datetime
+  },
+
+  // === Achievement state ===
+  "achievements": {
+    "earned": [
+      { "id": "first_steps", "at": "2026-04-01T10:30:00Z" },
+      { "id": "centurion", "at": "2026-07-10T09:15:00Z" }
+    ],
+    "progress": {                    // only unearned achievements with partial progress
+      "veteran": { "current": 147, "target": 500 },
+      "streak_quarter": { "current": 34, "target": 90 }
+    }
+  },
+
+  // === Per-project file familiarity ===
+  "familiarity": {
+    "/home/user/myproject": {
+      "sessions": 47,
+      "files": {
+        "src/auth.ts": { "touches": 83, "last": "2026-04-01" },
+        "src/api.ts": { "touches": 12, "last": "2026-03-01" }
+      }
+    }
+  },
+
+  // === Cosmetic state ===
+  "cosmetics": {
+    "hat": null,
+    "color": "default",
+    "shiny": false,
+    "title": "Centurion"
+  },
+
+  // === Cumulative lifetime metrics ===
+  "lifetime": {
+    "sessions": 147,
+    "durationMinutes": 17640,
+    "outputTokens": 3200000,
+    "inputTokens": 7500000,
+    "toolCalls": 9800,
+    "rejectedToolCalls": 210,
+    "fileEdits": 5400,
+    "testRuns": 1300,
+    "forceSnips": 28,
+    "contextResets": 7
+  }
+}
+```
+
+#### Design decisions
+
+| Decision | Rationale |
+|---|---|
+| `stats.base` is immutable | Determined by account hash at creation — your starting personality never changes |
+| `stats.growth` uses diminishing returns | Formula: `rawGrowth × (100 / (100 + currentGrowth))` — fast early growth, asymptotic cap |
+| `achievements.progress` is transient | Once earned, achievement moves to `earned` array and is deleted from `progress` |
+| `familiarity` is per-project | Buddy is global but tracks each project independently — supports both cross-project identity and project-specific reactions |
+| `lifetime` mirrors session metrics | Accumulates totals from every session — needed for achievement detection without replaying history |
+| `evolvedAt` records timestamps | Each tier transition is logged once and never overwritten — useful for journal milestones |
+
+#### Migration (v1 → v2)
+
+On first v2 session, the existing soul file is extended non-destructively:
+
+1. Preserve all current fields (`identity`, `stats.base`, `hatchedAt`)
+2. Add `progression` at level 1, 0 XP, tier `"hatchling"`
+3. Add empty `achievements`, `familiarity`, `cosmetics`
+4. Add `lifetime` with all counters at 0 (no retroactive credit)
+5. Add `stats.growth` initialized to 0 for all stats
+6. Set `version: 2`
+
+Missing v2 fields return safe defaults on read — a v1 soul file still works, it just starts fresh on progression.
+
+#### Session-end pipeline
+
+Achievement detection runs once per session via `processSessionEnd(metrics, soul)`:
+
+```
+1. Update soul.lifetime     ← accumulate session metrics
+2. Update soul.streak       ← increment or reset based on date gap
+3. Update soul.stats.growth ← apply diminishing returns formula
+4. Update soul.familiarity  ← bump touch counts, detect Homecoming/Old Friend
+5. Check achievements       ← evaluate triggers against updated state
+6. Award XP                 ← add achievement XP to soul.progression.totalXP
+7. Check level/tier         ← promote if threshold crossed
+8. Write soul file          ← persist updated state
+```
+
+Order matters — lifetime stats and familiarity must update before achievement triggers are evaluated, and achievement XP must be awarded before checking level thresholds.
+
 ---
 
 ## Monetization Model
@@ -216,6 +502,7 @@ This is a community specification. To contribute:
 - [Issue #41867](https://github.com/anthropics/claude-code/issues/41867) — Original feature request (anthropics/claude-code)
 - [Issue #41684](https://github.com/anthropics/claude-code/issues/41684) — RPG evolution proposal (anthropics/claude-code)
 - [r/ClaudeAI discussion](https://www.reddit.com/r/ClaudeAI/comments/1s9egh1/) — Reddit thread
+- [buddy-evolution PoC](https://github.com/RaphaelRUzan/buddy-evolution) — Working proof of concept with 104 tests (XP engine, stat growth, sprite overlays)
 
 ---
 
